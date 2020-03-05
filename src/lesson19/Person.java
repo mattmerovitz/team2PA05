@@ -7,8 +7,12 @@ public class Person {
 	int x;
 	int y;
 	int id = 0;
+	boolean infected = false;
 	Country country;
 	private Random random = new Random();
+	double infectionProb = 0.001;
+
+	
 
 	
 	public Person(int x,int y,Country country) {
@@ -19,7 +23,7 @@ public class Person {
 	}
 	
 	public String toString() {
-		return ""+this.id;
+		return (this.infected?"I":" ")+this.id;
 	}
 	
 	/**
@@ -32,7 +36,30 @@ public class Person {
 		int dy = random.nextInt(3)-1; // -1,0,1
 		if (isOK(this.x+dx, this.y+dy,this.country)) {
 			this.moveTo(this.x+dx, this.y+dy);		
-		}		
+		}	
+		if (this.infected) {
+			this.infectNeighbors();
+		}
+	}
+	
+	private void infect() {
+		// possibly become infected if you are near someone infected
+		if (Math.random()<=this.infectionProb) {
+			this.infected = true;
+		}
+	}
+	
+	private void infectNeighbors() {
+		for(int i=this.x-1; i<=this.x+1; i++) {
+			for(int j=this.y-1; j<this.y+1; j++) {
+				if (i>=0 && i<country.WIDTH && j >=0 && j<country.HEIGHT ) {
+					Person p = country.places[i][j];
+					if (p != null  && this.infected) {
+						p.infect();
+					}
+				}
+			}
+		}
 	}
 	
 	private void moveTo(int a, int b) {

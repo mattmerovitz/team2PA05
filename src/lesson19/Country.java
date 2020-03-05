@@ -13,6 +13,19 @@ public class Country {
 		places = new Person[WIDTH][HEIGHT];
 	}
 	
+	public void printStats() {
+		// count number of infected and print
+		int count = 0;
+		for(int i=0; i<places.length; i++) {
+			for(int j=0; j<places[i].length; j++) {
+				if (places[i][j] != null && places[i][j].infected) {
+				  count++;	
+				}
+			}
+		}
+		System.out.println("infected: "+ count);
+	}
+	
 	public void printCountry() {
 
 		for(int i=0; i<HEIGHT; i++) {
