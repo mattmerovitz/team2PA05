@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Simulation {
 	private static final int NUM = 40;
-	private static final int NUMTICKS=1000;
+	private static final int NUMTICKS=100;
 	
 	Person[] population;
 	Country country;
@@ -13,12 +13,8 @@ public class Simulation {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Simulation s = new Simulation();
-		//s.country.printCountry();
 		
-		System.out.println();
 		s.country.printCountry();
-		System.out.println();
-		s.country.printStats();
 		System.out.println("**********");
 		
 		for(int k=0;k<NUMTICKS; k++) {
@@ -31,17 +27,14 @@ public class Simulation {
 			for(Person q: s.population) {
 				q.infectNeighbors();
 			}
-			//System.out.println();
-			//s.country.printCountry();
-			System.out.println();
-			s.country.printStats();
-			//System.out.println("**********");
+			s.printInfo();
 		}
 
 	}
 	
+	
 	public Simulation() {
-		this.country = new Country(100,20);
+		this.country = new Country(10,10);
 		this.population = new Person[NUM];
 		for(int p1=0; p1<NUM; p1++) {
 			int i = random.nextInt(country.places.length);
@@ -59,6 +52,14 @@ public class Simulation {
 		}
 		Person p = this.population[0];
 		p.infected = true;
+	}
+	
+	public void printInfo() {
+		//System.out.println();
+		this.country.printCountry();
+		System.out.println();
+		this.country.printStats();
+		//System.out.println("**********");
 	}
 
 }

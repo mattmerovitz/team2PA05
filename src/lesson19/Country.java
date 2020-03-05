@@ -18,14 +18,22 @@ public class Country {
 	public void printStats() {
 		// count number of infected and print
 		int count = 0;
+		int numPeople=0;
+		int recovered = 0;
 		for(int i=0; i<places.length; i++) {
 			for(int j=0; j<places[i].length; j++) {
-				if (places[i][j] != null && places[i][j].infected) {
-				  count++;	
+				if (places[i][j] != null) {
+					numPeople++;
+					if (places[i][j].recovered) {
+						recovered++;
+					}
+					else if (places[i][j].infected) {
+						count++;
+					}
 				}
 			}
 		}
-		System.out.println("infected: "+ count);
+		System.out.println("infected: "+ count+"/"+numPeople+" recovered:"+recovered);
 	}
 	
 	public void printCountry() {

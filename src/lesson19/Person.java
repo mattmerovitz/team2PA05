@@ -12,6 +12,10 @@ public class Person {
 	Country country;
 	private Random random = new Random();
 	double infectionProb = 1.0;
+	int age = 0;
+	int infectionTime = -1;
+	int recoveryTime = 3; // they are not infectious after recovery
+	boolean recovered = false;
 
 	
 
@@ -24,7 +28,13 @@ public class Person {
 	}
 	
 	public String toString() {
-		return (this.infected?"+":" ")+this.id;
+		String r = " ";
+		if (this.recovered) {
+			r=">";
+		} else if (this.infected) {
+			r="+";
+		}
+		return r+this.id;
 	}
 	
 	/**
@@ -38,8 +48,14 @@ public class Person {
 		if (isOK(this.x+dx, this.y+dy,this.country)) {
 			this.moveTo(this.x+dx, this.y+dy);		
 		}	
-		if (this.exposed) {
+		if (this.exposed && ! this.infected) {
 			this.infected = true;
+			this.infectionTime = this.age;
+		}
+		this.age++;
+		if (infected && !this.recovered && (this.age - this.infectionTime > this.recoveryTime)) {
+			this.recovered = true;
+			System.out.printf("recovered: %3d %3d %3d %n",this.id,this.x,this.y);
 		}
 	}
 
@@ -56,7 +72,7 @@ public class Person {
 	}
 	
 	public void infectNeighbors() {
-		if (this.infected) {
+		if (this.infected && (this.age -this.infectionTime < this.recoveryTime)) {
 			for(int i=this.x-1; i<=this.x+1; i++) {
 				for(int j=this.y-1; j<this.y+1; j++) {
 					if (i>=0 && i<country.places.length 
