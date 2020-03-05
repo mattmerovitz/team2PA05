@@ -1,16 +1,18 @@
 package lesson19;
 
 public class Country {
-	public static final int WIDTH = 10;
-	public static final int HEIGHT = 10;
+
 	/**
 	 * places is a 2d array representing the places a person could be
 	 * each entry can contain either a Person or null
 	 */
 	public Person[][] places;
 	
+	public Country(int height, int width) {
+		this.places = new Person[height][width];
+	}
 	public Country() {
-		places = new Person[WIDTH][HEIGHT];
+		this(10,20);
 	}
 	
 	public void printStats() {
@@ -28,8 +30,8 @@ public class Country {
 	
 	public void printCountry() {
 
-		for(int i=0; i<HEIGHT; i++) {
-			for(int j=0; j<WIDTH; j++) {
+		for(int i=0; i<places.length; i++) {
+			for(int j=0; j<places[i].length; j++) {
 				Person p = places[i][j];
 				String s = "-";
 				if (p!=null) {

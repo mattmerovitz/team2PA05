@@ -8,9 +8,10 @@ public class Person {
 	int y;
 	int id = 0;
 	boolean infected = false;
+	boolean exposed = false; // after being exposed, one gets infect in next tick
 	Country country;
 	private Random random = new Random();
-	double infectionProb = 0.001;
+	double infectionProb = 1.0;
 
 	
 
@@ -23,7 +24,7 @@ public class Person {
 	}
 	
 	public String toString() {
-		return (this.infected?"I":" ")+this.id;
+		return (this.infected?"+":" ")+this.id;
 	}
 	
 	/**
@@ -37,25 +38,33 @@ public class Person {
 		if (isOK(this.x+dx, this.y+dy,this.country)) {
 			this.moveTo(this.x+dx, this.y+dy);		
 		}	
-		if (this.infected) {
-			this.infectNeighbors();
-		}
-	}
-	
-	private void infect() {
-		// possibly become infected if you are near someone infected
-		if (Math.random()<=this.infectionProb) {
+		if (this.exposed) {
 			this.infected = true;
 		}
 	}
+
 	
-	private void infectNeighbors() {
-		for(int i=this.x-1; i<=this.x+1; i++) {
-			for(int j=this.y-1; j<this.y+1; j++) {
-				if (i>=0 && i<country.WIDTH && j >=0 && j<country.HEIGHT ) {
-					Person p = country.places[i][j];
-					if (p != null  && this.infected) {
-						p.infect();
+	private void infect(Person p) {
+		// possibly become infected if you are near someone infected
+		if (Math.random()<=this.infectionProb) {
+			if (!this.infected) {
+				this.exposed = true;
+				System.out.printf("infected! %3d %3d %3d by %3d %3d %3d%n",
+						this.id,this.x,this.y,p.id,p.x,p.y);
+			}
+		}
+	}
+	
+	public void infectNeighbors() {
+		if (this.infected) {
+			for(int i=this.x-1; i<=this.x+1; i++) {
+				for(int j=this.y-1; j<this.y+1; j++) {
+					if (i>=0 && i<country.places.length 
+					 && j >=0 && j<country.places[0].length ) {
+						Person p = country.places[i][j];
+						if (p != null  && this.infected) {
+							p.infect(this);
+						}
 					}
 				}
 			}
@@ -70,7 +79,8 @@ public class Person {
 	}
 	
 	private boolean isOK(int a, int b,Country country) {
-		if (a<0 || a>=country.WIDTH || b<0 || b>= country.HEIGHT) {
+		if (a<0 || a>=country.places.length || b<0 
+				|| b>= country.places[0].length) {
 			return false;
 		}else if (country.places[a][b] !=null) {
 			return false;
