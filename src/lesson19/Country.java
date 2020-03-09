@@ -1,6 +1,10 @@
 package lesson19;
 
 public class Country {
+	
+	int numInfected=0;
+	int numRecovered=0;
+	int numPeople=0;
 
 	/**
 	 * places is a 2d array representing the places a person could be
@@ -33,6 +37,10 @@ public class Country {
 				}
 			}
 		}
+		this.numInfected = count;
+		this.numPeople = numPeople;
+		this.numRecovered = recovered;
+		
 		System.out.println("infected: "+ count+"/"+numPeople+" recovered:"+recovered);
 	}
 	

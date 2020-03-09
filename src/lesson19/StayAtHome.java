@@ -2,9 +2,9 @@ package lesson19;
 
 public class StayAtHome extends Person{
 
-	public StayAtHome() {
-		// TODO Auto-generated constructor stub
-		super();
+	
+	public StayAtHome(int x,int y,Country country) {
+		super(x,y,country);
 	}
 
 	public void tick() {
