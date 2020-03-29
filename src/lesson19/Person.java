@@ -39,11 +39,15 @@ public class Person {
 	public String toString() {
 		String r = " ";
 		if (this.recovered) {
-			r=">";
+			r="r";
 		} else if (this.infected) {
+			r="X";
+		} else if (this.exposed) {
+			r="E";
+		} else {
 			r="+";
 		}
-		return r+this.id;
+		return r;
 	}
 
 	/**

@@ -28,9 +28,11 @@ public class Simulation {
 				q.infectNeighbors();
 			}
 			s.printInfo();
+			s.country.printCountry();
+			System.out.println("\n\n\n\n");
 			if (s.country.numInfected==0) {
 				break;
-				
+
 			}
 		}
 		s.country.printCountry();
