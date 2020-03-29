@@ -13,14 +13,14 @@ public class Person {
   // the Country variable allows the user to "look around"
 	int x;
 	int y;
-  Country country;
+	Country country;
 
 
   // next we record their infection status
 	boolean infected = false;
 	boolean exposed = false; // after being exposed, one gets infect in next tick
-    boolean recovered = false;
-    double infectionProb = 0.5;  // probability of being infect when near a sick person
+	boolean recovered = false;
+	double infectionProb = 0.5;  // probability of being infect when near a sick person
 	int age = 0;  // their age in ticks
 	int infectionTime = -1;  // -1 means they haven't yet been infected
 	int recoveryTime = 21; // they are not infectious after recovery
