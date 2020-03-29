@@ -18,7 +18,7 @@ public class Country {
 	population is an array of all people in the country
 	this is the same set of people as in the places array
 	*/
-	Person[] population;
+	Population population;
 
 	public Country(int height, int width) {
 		this.places = new Person[height][width];
@@ -28,7 +28,8 @@ public class Country {
 		this(10,20);
 	}
 
-	public void printState(){
+	public void printState(int day){
+		System.out.printf("%3d ",day);
 		for(int i =0; i<numInfected; i++){
 			System.out.print("I");
 		}
@@ -42,12 +43,15 @@ public class Country {
 	}
 
 	public void simulateOneStep(){
-		for(Person q: population) {
-			q.tick();
+		//System.out.println("size= "+population.getSize());
+		//System.out.println(java.util.Arrays.toString(population.people));
+		for(int i=0; i<population.getSize(); i++){
+			population.people[i].tick();
 		}
-		for(Person q: population) {
-			q.infectNeighbors();
+		for(int i=0; i<population.getSize(); i++){
+			population.people[i].infectNeighbors();
 		}
+		this.getStats();
 	}
 
 	public void getStats() {
@@ -55,6 +59,8 @@ public class Country {
 		int count = 0;
 		int numPeople=0;
 		int recovered = 0;
+		// here we iterate through places,
+		// but it would be better to iterate through population
 		for(int i=0; i<places.length; i++) {
 			for(int j=0; j<places[i].length; j++) {
 				if (places[i][j] != null) {
@@ -86,7 +92,7 @@ public class Country {
 		for(int i=0; i<places.length; i++) {
 			for(int j=0; j<places[i].length; j++) {
 				Person p = places[i][j];
-				String s = " ";
+				String s = "_";
 				if (p!=null) {
 					s = p.toString();
 				}

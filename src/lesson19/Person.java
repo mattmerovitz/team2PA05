@@ -50,6 +50,13 @@ public class Person {
 		this.country=country;
 	}
 
+	public Person(){
+		this.x=-1;
+		this.y=-1;
+		this.id = Person.counter++;
+		this.country=null;
+	}
+
 	public void setPosition(int x, int y){
 		this.x=x;
 		this.y=y;
@@ -109,7 +116,6 @@ public class Person {
 		this.age++;
 		if (infected && !this.recovered && (this.age - this.infectionTime > this.recoveryTime)) {
 			this.recovered = true;
-			//System.out.printf("recovered: %3d %3d %3d %n",this.id,this.x,this.y);
 		}
   }
 
@@ -136,11 +142,12 @@ public class Person {
 	visits all neighbors and infects them
 	*/
 	void infectNeighbors() {
+
 		if (this.infected && (this.age -this.infectionTime < this.recoveryTime)) {
 			for(int i=this.x-1; i<=this.x+1; i++) {
-				for(int j=this.y-1; j<this.y+1; j++) {
+				for(int j=this.y-1; j<=this.y+1; j++) {
 					if (i>=0 && i<country.places.length
-					 && j >=0 && j<country.places[0].length ) {
+					 && j >=0 && j<country.places[i].length ) {
 						Person p = country.places[i][j];
 						if (p != null  && this.infected) {
 							p.infect(this);
