@@ -149,8 +149,7 @@ public class Person {
 		if (this.infected && (this.age -this.infectionTime < this.recoveryTime)) {
 			for(int i=this.x-1; i<=this.x+1; i++) {
 				for(int j=this.y-1; j<=this.y+1; j++) {
-					if (i>=0 && i<country.places.length
-					 && j >=0 && j<country.places[i].length ) {
+					if (inRange(i,j,country)) {
 						Person p = country.places[i][j];
 						if (p != null  && this.infected) {
 							p.infect(this);
@@ -159,6 +158,12 @@ public class Person {
 				}
 			}
 		}
+	}
+
+	public boolean inRange(int i, int j, Country country){
+		return
+		    (i>=0 && i<country.places.length
+		 &&  j>=0 && j<country.places[i].length );
 	}
 
 	/**
