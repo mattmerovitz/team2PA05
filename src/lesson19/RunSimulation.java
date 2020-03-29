@@ -11,19 +11,22 @@ public class RunSimulation {
 	public static void main(String[] args) {
 		// first we get the simulation parameters
 		// from the command line
-		int numPeople = Integer.parseInt(args[0]);
-		int width = Integer.parseInt(args[1]);
-		int height = Integer.parseInt(args[2]);
+
+		int width = Integer.parseInt(args[0]);
+		int height = Integer.parseInt(args[1]);
+		int numStayHome = Integer.parseInt(args[2]);
+		int numEssential = Integer.parseInt(args[3]);
+		int numSkeptic = Integer.parseInt(args[4]);
 
 		// next we create the population and the country
 		Population population;
 
 		//population = new Population(numPeople);
 		//population = new AllStayAtHome(numPeople);
-		int numEssential = numPeople/10;
-		int numOther = numPeople/20;
-		int numStayHome = numPeople - numEssential - numOther;
-		population = new MixedPopulation(numStayHome, numEssential, numOther);
+		//int numEssential = numPeople/10;
+		//int numOther = numPeople/20;
+		//int numStayHome = numPeople - numEssential - numOther;
+		population = new MixedPopulation(numStayHome, numEssential, numSkeptic);
 		population.createPeople();
 
 		Country country = new Country(width,height);

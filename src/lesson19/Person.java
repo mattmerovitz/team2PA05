@@ -91,11 +91,14 @@ public class Person {
 
 	}
 
+  void tryToMove(){
+		tryToMoveRandomly();
+	}
   /**
 	   try to move one step in a random direction.
 		 if they way is blocked then don't move.
 	*/
-  void tryToMove(){
+  void tryToMoveRandomly(){
     int dx = random.nextInt(3)-1; // -1,0,1
     int dy = random.nextInt(3)-1; // -1,0,1
     if (isOK(this.x+dx, this.y+dy,this.country)) {
