@@ -2,6 +2,8 @@ package lesson19;
 
 public class Country {
 
+	/** these are summary statistics about the epidemic
+	*/
 	int numInfected=0;
 	int numRecovered=0;
 	int numPeople=0;
@@ -11,6 +13,7 @@ public class Country {
 	 * each entry can contain either a Person or null
 	 */
 	public Person[][] places;
+
 	/**
 	population is an array of all people in the country
 	this is the same set of people as in the places array
@@ -20,11 +23,34 @@ public class Country {
 	public Country(int height, int width) {
 		this.places = new Person[height][width];
 	}
+
 	public Country() {
 		this(10,20);
 	}
 
-	public void printStats() {
+	public void printState(){
+		for(int i =0; i<numInfected; i++){
+			System.out.print("I");
+		}
+		for(int i=0; i<numPeople-numInfected-numRecovered; i++){
+			System.out.print("_");
+		}
+		for(int i=0; i<numRecovered; i++){
+			System.out.print("R");
+		}
+		System.out.println();
+	}
+
+	public void simulateOneStep(){
+		for(Person q: population) {
+			q.tick();
+		}
+		for(Person q: population) {
+			q.infectNeighbors();
+		}
+	}
+
+	public void getStats() {
 		// count number of infected and print
 		int count = 0;
 		int numPeople=0;
@@ -45,8 +71,14 @@ public class Country {
 		this.numInfected = count;
 		this.numPeople = numPeople;
 		this.numRecovered = recovered;
+	}
 
-		System.out.println("infected: "+ count+"/"+numPeople+" recovered:"+recovered);
+	public void printStats() {
+		this.getStats();
+		System.out.println("infected: "+ this.numInfected
+		      +"/"+this.numPeople
+					+" recovered:"+this.numRecovered);
+
 	}
 
 	public void printCountry() {

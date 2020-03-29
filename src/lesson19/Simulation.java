@@ -18,18 +18,25 @@ public class Simulation {
 		System.out.println("**********");
 
 		for(int k=0;k<NUMTICKS; k++) {
-			System.out.println("Time = "+k+" ");
+			//System.out.println("Time = "+k+" ");
 
-
+			s.country.simulateOneStep();
+			/*
 			for(Person q: s.population) {
 				q.tick();
 			}
 			for(Person q: s.population) {
 				q.infectNeighbors();
 			}
+			*/
+			s.country.getStats();
+			System.out.printf("%2d ",k);
+			s.country.printState();
+			/*
 			s.printInfo();
 			s.country.printCountry();
 			System.out.println("\n\n\n\n");
+			*/
 			if (s.country.numInfected==0) {
 				break;
 
@@ -59,6 +66,7 @@ public class Simulation {
 		}
 		Person p = this.population[0];
 		p.infected = true;
+		this.country.population = population;
 	}
 
 
