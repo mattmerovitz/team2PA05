@@ -1,6 +1,11 @@
 package lesson19;
 
 import java.util.Random;
+/**
+ * 
+ * @author tim
+ *
+ */
 
 public class RunSimulation {
 	// the maximum number of days the simulation will run
