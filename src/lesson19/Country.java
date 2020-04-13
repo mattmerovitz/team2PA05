@@ -1,12 +1,18 @@
+//Team 2 (Matthew Merovitz & Max Melnikas)
+//PA05
+
 package lesson19;
 
 public class Country {
 
 	/** these are summary statistics about the epidemic
 	*/
-	int numInfected=0;
+	double numInfected=0;
 	int numRecovered=0;
 	int numPeople=0;
+	int counter = 0;
+	int finalCounter = 0;
+	int totalInfected = 0;
 
 	/**
 	 * places is a 2d array representing the places a person could be
@@ -32,14 +38,20 @@ public class Country {
 		System.out.printf("%3d ",day);
 		for(int i =0; i<numInfected; i++){
 			System.out.print("I");
+			counter++;
 		}
 		for(int i=0; i<numPeople-numInfected-numRecovered; i++){
 			System.out.print("_");
 		}
 		for(int i=0; i<numRecovered; i++){
 			System.out.print("R");
+			totalInfected = numRecovered;
 		}
 		System.out.println();
+		if (counter > finalCounter) {
+			finalCounter = counter;
+		}
+		counter = 0;
 	}
 
 	public void simulateOneStep(){

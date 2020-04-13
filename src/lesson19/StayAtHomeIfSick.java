@@ -1,3 +1,6 @@
+//Team 2 (Matthew Merovitz & Max Melnikas)
+//PA05
+
 package lesson19;
 
 public class StayAtHomeIfSick extends Person{
@@ -10,7 +13,7 @@ public class StayAtHomeIfSick extends Person{
 	public void tryToMove() {
 
     if (!this.infected){
-      super.tryToMove();
+      super.tryToMove();//move only if not infected
     }
 	}
 

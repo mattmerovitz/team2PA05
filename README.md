@@ -50,3 +50,6 @@ This will let you start to get a sense of how these different policies affect th
 Run some experiments and try to estimate the effect of a StayAtHome policy compared to a Skeptic policy.
 
 You should upload a link to your Git Repository to Latte when you are done and include a reflection where you make remarks about what you have learned if anything from this PA. This can be about new Java concepts or about Viral spread.
+
+javac lesson19/*.java
+java lesson19.RunSimulation 10 20 0 20 50 0 0

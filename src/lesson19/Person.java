@@ -1,3 +1,6 @@
+//Team 2 (Matthew Merovitz & Max Melnikas)
+//PA05
+
 package lesson19;
 import java.util.Random;
 /**

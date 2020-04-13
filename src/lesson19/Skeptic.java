@@ -1,3 +1,6 @@
+//Team 2 (Matthew Merovitz & Max Melnikas)
+//PA05
+
 package lesson19;
 
 import java.util.*;
@@ -11,7 +14,7 @@ public class Skeptic extends Person {
     int dy = random.nextInt(3)-1; // -1,0,1
 
     if (dx == 0 && dy == 0){
-      this.tryToMoveRandomly();
+      this.tryToMoveRandomly();//moves no matter what
     }
 
     if (isOK(super.x+dx, super.y+dy, super.country)) {
